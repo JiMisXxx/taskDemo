@@ -1,20 +1,21 @@
+package MyLocal;
+
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 
 public class getPath {
     public static void main(String[] args) throws IOException {
-        System.out.println("文件路径:");
-//        File f = new File(getPath.class.getResource("/").getPath());
+        System.out.println("鏂囦欢璺緞:");
+//        File f = new File(MyLocal.getPath.class.getResource("/").MyLocal.getPath());
 //        System.out.println(f.toString());
-//        File f2 = new File(getPath.class.getResource("").getPath());
+//        File f2 = new File(MyLocal.getPath.class.getResource("").MyLocal.getPath());
 //        System.out.println(f2);
 
-        File directory = new File("");// 参数为空
+        File directory = new File("");// 鍙傛暟涓虹┖
         String courseFile = directory.getCanonicalPath();
         System.out.println(courseFile);
 
-//        URL xmlpath = getPath.class.getClassLoader().getResource("");
+//        URL xmlpath = MyLocal.getPath.class.getClassLoader().getResource("");
 //        System.out.println(xmlpath);
 //
 //

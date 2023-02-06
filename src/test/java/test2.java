@@ -1,4 +1,4 @@
-import dbConnection.gettingConnection;
+import MyLocal.dbConnection.GettingConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class test2 {
     public static void main(String[] args) throws Exception {
         String str = "select * from test1 where var1 = ?;";
-        Connection con = gettingConnection.gettingCon("test");
+        Connection con = GettingConnection.gettingCon("test");
         PreparedStatement ps = con.prepareStatement(str, ResultSet.TYPE_FORWARD_ONLY);
         ps.setString(1, "2");
         ResultSet rs = ps.executeQuery();

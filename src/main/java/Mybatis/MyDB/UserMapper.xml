@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace=绑定一个对应的Dao/Mapper接口-->
+<mapper namespace="Mybatis.MyDAO.UserMapper">
+    <select id="getUserList" resultType="Mybatis.MyDTO.User">
+        select *
+        from mylocal.user
+    </select>
+
+    <select id="getUserById" parameterType="int" resultType="Mybatis.MyDTO.User">
+        select *
+        from mylocal.user
+        <where>
+            <if test="userid != null and userid != ''">
+                useid = #{userid}
+            </if>
+        </where>
+    </select>
+    <!--
+        对象中的属性，可以直接取出来
+    -->
+    <insert id="addUser" parameterType="Mybatis.MyDTO.User">
+        insert into mybatis.user (userid, username, password)
+        values (#{userid}, #{username}, #{password})
+    </insert>
+    <update id="updateUser" parameterType="Mybatis.MyDTO.User">
+        update mylocal.user
+        set username=#{username},
+            password=#{password}
+        where userid = #{userid}
+    </update>
+    <delete id="deleteUser" parameterType="Mybatis.MyDTO.User">
+        delete
+        from mylocal.user
+        where userid = #{userid}
+    </delete>
+</mapper>

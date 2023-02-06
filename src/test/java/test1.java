@@ -1,5 +1,3 @@
-import taskRun.Tasktest;
-
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
@@ -9,11 +7,10 @@ import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import static taskRun.creatBat.executeBat;
-
+import static MyLocal.taskRun.creatBat.executeBat;
 public class test1 {
-    private static DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");//ÉèÖÃÈÕÆÚ¸ñÊ½
-    static File directory = new File("");// ²ÎÊıÎª¿Õ
+    private static DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½Ê½
+    static File directory = new File("");// ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½
     static String courseFile;
 
     static {
@@ -25,11 +22,11 @@ public class test1 {
     }
 
     static final Timer timer = new Timer();
-    static String file = courseFile+"/"; //ÒªÖ´ĞĞÎÄ¼şµÄÂ·¾¶
+    static String file = courseFile+"/"; //ÒªÖ´ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½Â·ï¿½ï¿½
     static int times = 0;
-    static long runSeconds = 2;//ÉèÖÃÈÎÎñ¶àÉÙÃëºóÆô¶¯
-    static long runbeteen = 5;//ÉèÖÃÆô¶¯ÏÂ¸öÈÎÎñµÄ¼ä¸ôÊ±¼ä£¬µ¥Î»Ãë
-    static String runfileNameMul = "";//ÒªÖ´ĞĞµÄÄÚÈİ
+    static long runSeconds = 2;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    static long runbeteen = 5;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¸ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½Ê±ï¿½ä£¬ï¿½ï¿½Î»ï¿½ï¿½
+    static String runfileNameMul = "";//ÒªÖ´ï¿½Ğµï¿½ï¿½ï¿½ï¿½ï¿½
 
     public static void main(String[] args) {
         runTaskDemo();
@@ -39,16 +36,16 @@ public class test1 {
         public void run() {
             try {
                 String[] runfileName = runfileNameMul.split("\\|");
-                System.out.println("¶¨Ê±ÈÎÎñµÚ" + (times+1) + "´ÎÆô¶¯,Æô¶¯Ê±¼ä:" + LocalDateTime.now().format(df));
+                System.out.println("ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½" + (times+1) + "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½:" + LocalDateTime.now().format(df));
                 executeBat(file, runfileName[times]);
-                System.out.println("µ±Ç°ÈÎÎñÆô¶¯³É¹¦!");
+                System.out.println("ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½!");
                 String endTime = LocalDateTime.now().plusSeconds(runbeteen).format(df);
-                System.out.println("ÏÂ´ÎÈÎÎñÖ´ĞĞÊ±¼äÎª" + runbeteen + "ÃëÖ®ºó,Ô¤¼ÆÆô¶¯Ê±¼ä:"+endTime);
+                System.out.println("ï¿½Â´ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½Ê±ï¿½ï¿½Îª" + runbeteen + "ï¿½ï¿½Ö®ï¿½ï¿½,Ô¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½:"+endTime);
                 System.out.println("---------------------------------------------------------");
                 times++;
                 if(times == runfileName.length) {
                     timer.cancel();
-                    System.out.println("¶¨Ê±ÈÎÎñÒÑ¾­È«²¿Ö´ĞĞÍê³É......");
+                    System.out.println("ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½È«ï¿½ï¿½Ö´ï¿½ï¿½ï¿½ï¿½ï¿½......");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -57,25 +54,25 @@ public class test1 {
     }
 
     public static void runTaskDemo(){
-        System.out.println("µ±Ç°ÎÄ¼şÂ·¾¶:"+courseFile);
+        System.out.println("ï¿½ï¿½Ç°ï¿½Ä¼ï¿½Â·ï¿½ï¿½:"+courseFile);
         Scanner sc = new Scanner(System.in);
-        //"ÇëÊäÈëÒªÖ´ĞĞµÄÎÄ¼şÃû£¬¶à¸öÎÄ¼şÃûÓÃ'|'¸ô¿ª,×¢ÒâÎÄ¼şÃû²»ÄÜ´øÓĞ¿Õ¸ñµÈÌØÊâ×Ö·û:"
-        System.out.println("ÇëÊäÈëÒªÖ´ĞĞµÄÎÄ¼şÃû»òÃüÁî£¬¶à¸ö'|'¸ô¿ª,×¢ÒâÎÄ¼şÃû²»ÄÜ´øÓĞÖĞÎÄºÍ¿Õ¸ñµÈÌØÊâ×Ö·û:");
+        //"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÒªÖ´ï¿½Ğµï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½'|'ï¿½ï¿½ï¿½ï¿½,×¢ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü´ï¿½ï¿½Ğ¿Õ¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½:"
+        System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÒªÖ´ï¿½Ğµï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½î£¬ï¿½ï¿½ï¿½'|'ï¿½ï¿½ï¿½ï¿½,×¢ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÄºÍ¿Õ¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½:");
 //        sc.useDelimiter("\n");
         runfileNameMul = sc.nextLine();
-        //"ÇëÉèÖÃÎÄ¼şÆô¶¯Ê±¼ä£¬nÃëºóÆô¶¯£¬µ¥Î»£¨Ãë£©:"
-        System.out.println("ÇëÉèÖÃÎÄ¼şÆô¶¯Ê±¼ä,nÃëºóÆô¶¯,µ¥Î»(Ãë):");
+        //"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä£¬nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ë£©:"
+        System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½,nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½Î»(ï¿½ï¿½):");
         runSeconds = sc.nextLong();
-        //"ÇëÉèÖÃÆô¶¯¶à¸öÎÄ¼şÖ®¼äµÄ¼ä¸ôÊ±¼ä£¬nÃë¼ä¸ô£¬µ¥Î»£¨Ãë£©:"
-        System.out.println("ÇëÉèÖÃÆô¶¯¶à¸öÎÄ¼şÖ®¼äµÄ¼ä¸ôÊ±¼ä,nÃë¼ä¸ô,µ¥Î»(Ãë):");
+        //"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½Ö®ï¿½ï¿½Ä¼ï¿½ï¿½Ê±ï¿½ä£¬nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ë£©:"
+        System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½Ö®ï¿½ï¿½Ä¼ï¿½ï¿½Ê±ï¿½ï¿½,nï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½Î»(ï¿½ï¿½):");
         runbeteen = sc.nextLong();
         LocalDateTime startTime = LocalDateTime.now();
         LocalDateTime endTime = startTime.plusSeconds(runSeconds);
         long between = Duration.between(startTime, endTime).getSeconds();
         System.out.println("---------------------------------------------------------");
-        System.out.println("ÈÎÎñ¿ªÊ¼Æô¶¯...");
-        System.out.println("¿ªÊ¼Ê±¼ä:" + startTime.format(df));
-        System.out.println(between + "ÃëºóÆô¶¯ÈÎÎñ,Ô¤¼ÆÆô¶¯Ê±¼ä:"+endTime.format(df));
+        System.out.println("ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½...");
+        System.out.println("ï¿½ï¿½Ê¼Ê±ï¿½ï¿½:" + startTime.format(df));
+        System.out.println(between + "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,Ô¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½:"+endTime.format(df));
         System.out.println("---------------------------------------------------------");
         timer.schedule(new Task(), between * 1000, runbeteen* 1000);
 

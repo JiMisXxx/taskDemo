@@ -1,6 +1,6 @@
-package oprnExcel;
+package MyLocal.oprnExcel;
 
-import dbConnection.gettingConnection;
+import MyLocal.dbConnection.GettingConnection;
 import org.apache.poi.xssf.streaming.SXSSFCell;
 import org.apache.poi.xssf.streaming.SXSSFRow;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
@@ -21,21 +21,22 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class dbToExcel implements Runnable {
-    private static final DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");//ÉèÖÃÈÕÆÚ¸ñÊ½
-    static int threadcnt = 5; //ÆôÓÃÏß³ÌÊı
+public class DbToExcel implements Runnable {
+
+    public static final String CLASS_ALIAS = "DbToExcel";
+    private static final DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");//è®¾ç½®æ—¥æœŸæ ¼å¼
+    static int threadcnt = 1; //å¯ç”¨çº¿ç¨‹æ•°
     static AtomicInteger threadnow = new AtomicInteger(0);
-    static int maxRow = 1000;//µ¥¸öExcelÎÄ¼şÔÊĞíĞ´ÈëµÄ×î´óĞĞÊı
-    List<String> myList = Arrays.asList("0","1","2","3","4","5");//Ã¿¸öExcelĞèÒªĞ´ÈëÊı¾İµÄ²éÑ¯Ìõ¼ş
-    String filename = null;//ÎÄ¼şÃû£¬ÈôÎª¿ÕÔòÊ¹ÓÃ²éÑ¯Ìõ¼ş×÷ÎªÎÄ¼şÃû
-        static String str = "select * from menzhenRC221227 where `\uFEFF»ú¹¹±àÂë` = ?;";
+    static int maxRow = 1000;//å•ä¸ªExcelæ–‡ä»¶å…è®¸å†™å…¥çš„æœ€å¤§è¡Œæ•°
+    List<String> myList = Arrays.asList("44000000000001821594");//æ¯ä¸ªExceléœ€è¦å†™å…¥æ•°æ®çš„æŸ¥è¯¢æ¡ä»¶
+    static String str = "select * from  setl_d where emp_no = ?;";
 
     public static void main(String[] args) {
         running();
     }
 
     /**
-     * Ã¿¸öÏß³Ì´¦ÀíÒ»¸ö²éÑ¯Ìõ¼şµÄÊı¾İĞ´Èëµ½Excel
+     * æ¯ä¸ªçº¿ç¨‹å¤„ç†ä¸€ä¸ªæŸ¥è¯¢æ¡ä»¶çš„æ•°æ®å†™å…¥åˆ°Excel
      */
     @Override
     public void run() {
@@ -50,48 +51,44 @@ public class dbToExcel implements Runnable {
     }
 
     /**
-     * ¶àÏß³Ìµ÷ÓÃ
+     * å¤šçº¿ç¨‹è°ƒç”¨
      */
     public static void running() {
         ExecutorService fixedThreadPool = Executors.newFixedThreadPool(threadcnt);
-        for (int i = 0; i < threadcnt; i++) {
-            fixedThreadPool.execute(new dbToExcel());
+        for (int i = 0; i < threadcnt; i++) {            fixedThreadPool.execute(new DbToExcel());
         }
         fixedThreadPool.shutdown();
     }
 
     /**
-     * POI SXSSFWorkbookĞ´ÈëExcelÎÄ¼ş
+     * POI SXSSFWorkbookå†™å…¥Excelæ–‡ä»¶
      */
     public void writeinto(String conditions) throws Exception {
-        if (filename == null) {
-            filename = conditions;
-        }
-        System.out.println("ÎÄ¼ş[" + filename + ".xlsx]ÕıÔÚ»ñÈ¡Êı¾İ£¬Ê±¼ä£º" + LocalDateTime.now().format(df));
-        Connection con = gettingConnection.gettingCon("w_aaa");
+        System.out.println("æ–‡ä»¶[" + conditions + ".xlsx]æ­£åœ¨è·å–æ•°æ®ï¼Œæ—¶é—´ï¼š" + LocalDateTime.now().format(df));
+        Connection con = GettingConnection.gettingCon("mylocal");
         PreparedStatement ps = con.prepareStatement(str, ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
         ps.setString(1, conditions);
         ResultSet rs = ps.executeQuery();
         ResultSetMetaData data = rs.getMetaData();
-        System.out.println("ÎÄ¼ş[" + filename + ".xlsx]»ñÈ¡Êı¾İÍê³É£¬¿ªÊ¼Ğ´ÈëÊı¾İ£¬Ê±¼ä£º" + LocalDateTime.now().format(df));
+        System.out.println("æ–‡ä»¶[" + conditions + ".xlsx]è·å–æ•°æ®å®Œæˆï¼Œå¼€å§‹å†™å…¥æ•°æ®ï¼Œæ—¶é—´ï¼š" + LocalDateTime.now().format(df));
         ArrayList<String> celltitle = new ArrayList<>();
-        //»ñÈ¡±íÍ·×Ö¶Î
+        //è·å–è¡¨å¤´å­—æ®µ
         for (int i = 0; i < data.getColumnCount(); i++) {
             celltitle.add(data.getColumnName(i + 1));
         }
-        int fnindex = 1;//ÓÃÀ´¼ÇÂ¼ĞèÒª´´½¨µÄÎÄ¼şÊı£¬
+        int fnindex = 1;//ç”¨æ¥è®°å½•éœ€è¦åˆ›å»ºçš„æ–‡ä»¶æ•°ï¼Œ
         while (true) {
-            //´´½¨ExcelÎÄ¼ş±¡
+            //åˆ›å»ºExcelæ–‡ä»¶è–„
             SXSSFWorkbook workbook = new SXSSFWorkbook();
-            //´´½¨¹¤×÷±ísheeet
+            //åˆ›å»ºå·¥ä½œè¡¨sheeet
             SXSSFSheet sheet = workbook.createSheet();
-            //´´½¨µÚÒ»ĞĞ,Ğ´Èë±íÍ·
+            //åˆ›å»ºç¬¬ä¸€è¡Œ,å†™å…¥è¡¨å¤´
             SXSSFRow row = sheet.createRow(0);
             for (int i = 0; i < celltitle.size(); i++) {
                 SXSSFCell cell = row.createCell(i);
                 cell.setCellValue(celltitle.get(i));
             }
-            //Ğ´ÈëÊı¾İ
+            //å†™å…¥æ•°æ®
             int rows = 1, limit = 0;
             while (rs.next()) {
                 SXSSFRow nextrow = sheet.createRow(rows++);
@@ -99,28 +96,28 @@ public class dbToExcel implements Runnable {
                     SXSSFCell cell2 = nextrow.createCell(i - 1);
                     cell2.setCellValue(rs.getString(i));
                 }
-                //ÅĞ¶Ï±¾´ÎÊı¾İÁ¿ÊÇ·ñ´ïµ½Ğ´ÈëExcelµÄ×î´óĞĞÊı
+                //åˆ¤æ–­æœ¬æ¬¡æ•°æ®é‡æ˜¯å¦è¾¾åˆ°å†™å…¥Excelçš„æœ€å¤§è¡Œæ•°
                 if (++limit == maxRow) {
                     break;
                 }
             }
-            //limitµÈÓÚ0±íÊ¾ËùÓĞÊı¾İĞ´ÈëÍê±Ï£¬½áÊøÑ­»·
+            //limitç­‰äº0è¡¨ç¤ºæ‰€æœ‰æ•°æ®å†™å…¥å®Œæ¯•ï¼Œç»“æŸå¾ªç¯
             if (limit == 0) {
                 break;
             }
             StringBuilder sb = new StringBuilder();
-            sb.append(filename);
-            //¸ù¾İfnindexÖµÅĞ¶ÏÊÇ·ñÒªĞ´Èë¶ş¸öÒÔÉÏExcelÎÄ¼ş
+            sb.append(conditions);
+            //æ ¹æ®fnindexå€¼åˆ¤æ–­æ˜¯å¦è¦å†™å…¥äºŒä¸ªä»¥ä¸ŠExcelæ–‡ä»¶
             if (fnindex != 1) {
                 sb.append("-").append(fnindex);
             }
-            //´´½¨Ò»¸öÎÄ¼ş
-            File wfile = new File("C:/Users/admin/Desktop/½á¹û¼¯/" + sb.toString() + ".xlsx");
+            //åˆ›å»ºä¸€ä¸ªæ–‡ä»¶
+            File wfile = new File("D:\\Users\\Admin\\Desktop\\ç»“æœé›†\\" + sb + ".xlsx");
             FileOutputStream op = new FileOutputStream(wfile);
             workbook.write(op);
             op.flush();
             op.close();
-            System.out.println("ÎÄ¼ş[" + sb.toString() + ".xlsx]Ğ´Èë³É¹¦£¡Íê³ÉÊ±¼ä£º" + LocalDateTime.now().format(df));
+            System.out.println("æ–‡ä»¶[" + sb + ".xlsx]å†™å…¥æˆåŠŸï¼å®Œæˆæ—¶é—´ï¼š" + LocalDateTime.now().format(df));
             fnindex++;
         }
     }

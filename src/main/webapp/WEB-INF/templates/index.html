@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+<h1>HelloWorld!!!</h1>
+<!--
+    @{}是thymeleaf的语法，这么写的好处是当项目路径改了，我们也可以通过他直接定位到绝对路径
+    如果不这么写的话，就得写href="/mvcDemo/other"
+-->
+<a th:href="@{/other}">访问其他页面</a>
+<a th:href="@{/demo/demo1}">访问Demo页面</a>
+</body>
+</html>

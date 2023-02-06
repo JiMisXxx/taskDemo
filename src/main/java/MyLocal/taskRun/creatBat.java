@@ -1,4 +1,4 @@
-package taskRun;
+package MyLocal.taskRun;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -8,7 +8,7 @@ public class creatBat {
     public static void executeBat(String file,String runfileName) {
         try {
             String pan = file.substring(0, 2);
-            FileWriter writer = new FileWriter(file + "Ö´ÐÐÃüÁî.bat");
+            FileWriter writer = new FileWriter(file + "æ‰§è¡Œå‘½ä»¤.bat");
             writer.write("@echo   off ");
             writer.write("\r\n ");
             writer.write(pan);
@@ -19,7 +19,7 @@ public class creatBat {
             writer.write("\r\n ");
             writer.write("@echo   on ");
             writer.close();
-            Process var4 = run.exec(file + "Ö´ÐÐÃüÁî.bat");
+            Process var4 = run.exec(file + "æ‰§è¡Œå‘½ä»¤.bat");
         } catch (IOException e)  {
             e.printStackTrace();
         } // TODO Auto-generated catch block

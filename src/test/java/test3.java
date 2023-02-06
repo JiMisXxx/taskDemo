@@ -1,69 +1,40 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.streaming.SXSSFCell;
+import org.apache.poi.xssf.streaming.SXSSFRow;
+import org.apache.poi.xssf.streaming.SXSSFSheet;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+
 
 public class test3 {
-    public static void main(String[] args) {
-        List<Map<String,String>> list = new ArrayList<>();
-        Map <String,String> map1 = new HashMap<>();
-        map1.put("M01103", "µØÖĞº£Æ¶Ñª£¨º£ÑóĞÔÆ¶Ñª»òÖéµ°°×Éú³ÉÕÏ°­ĞÔÆ¶Ñª£©");
-        map1.put("M01102", "ÔÙÉúÕÏ°­ĞÔÆ¶Ñª");
-        map1.put("M01200", "ÑªÓÑ²¡");
-        map1.put("M00300", "°¬×Ì²¡");
-        map1.put("M00105", "»î¶¯ĞÔ·Î½áºË");
-        map1.put("M02101", "¾«Éñ·ÖÁÑÖ¢");
-        map1.put("M02104", "·ÖÁÑÇé¸ĞĞÔÕÏ°­");
-        map1.put("M02103", "³Ö¾ÃµÄÍıÏëĞÔÕÏ°­£¨Æ«Ö´ĞÔ¾«Éñ²¡£©");
-        map1.put("M02102", "Ë«Ïà£¨Çé¸Ğ£©ÕÏ°­");
-        map1.put("M02105", "ñ²ğïËùÖÂ¾«ÉñÕÏ°­");
-        map1.put("M02106", " ¾«Éñ·¢Óı³ÙÖÍ°é·¢¾«ÉñÕÏ°­");
-        map1.put("M07803", " ÂıĞÔÉö¹¦ÄÜ²»È«£¨ÑªÍ¸ÖÎÁÆ£©");
-        map1.put("M07804", " ÂıĞÔÉö¹¦ÄÜ²»È«£¨¸¹Í¸ÖÎÁÆ£©");
-        map1.put("M00503", " ¶ñĞÔÖ×Áö·Å¡¢»¯¡¢½éÈë»òºËËØÖÎÁÆ");
-        map1.put("M08300", " Æ÷¹ÙÒÆÖ²¿¹ÅÅÒìÖÎÁÆ");
-        map1.put("M01001", " Â­ÄÚÁ¼ĞÔÖ×Áö¸¨ÖúÓÃÒ©");
-        map1.put("M03900", " ¸ßÑªÑ¹²¡");
-        map1.put("M01600", " ÌÇÄò²¡");
-        map1.put("M05300", "ÂıĞÔ×èÈûĞÔ·Î¼²²¡");
-        map1.put("M04600", "¹ÚĞÄ²¡");
-        map1.put("M04803", "ÄÔÑª¹Ü¼²²¡ºóÒÅÖ¢");
-        map1.put("M06900", "Àà·çÊª¹Ø½ÚÑ×");
-        map1.put("M05400", "Ö§Æø¹ÜÏø´­");
-        map1.put("M00201", "ÂıĞÔÒÒĞÍ¸ÎÑ×");
-        map1.put("M02300", "ÅÁ½ğÉ­²¡");
-        map1.put("M02500", "ñ²ğï");
-        map1.put("M07200", "Ç¿Ö±ĞÔ¼¹ÖùÑ×");
-        map1.put("M06000", "¿ËÂŞ¶÷²¡");
-        map1.put("M06501", "À£ÑñĞÔ½á³¦Ñ×");
-        map1.put("M06700", "ÒøĞ¼²¡");
-        map1.put("M04301", "ÂıĞÔĞÄ¹¦ÄÜ²»È«");
-        map1.put("M07101", "ÏµÍ³ĞÔºì°ßÀÇ´¯");
-        map1.put("M06201", " ¸ÎÓ²»¯£¨Ê§´ú³¥ÆÚ£©");
-        map1.put("M07800", " ÂıĞÔÉö¹¦ÄÜ²»È«£¨·ÇÍ¸ÎöÖÎÁÆ£©");
-        map1.put("M03704", " ÊÓÍøÄ¤¾²Âö×èÈûËùÖÂ»Æ°ßË®Ö×");
-        map1.put("M12100", " ĞÂ¹Ú·ÎÑ×³öÔº»¼ÕßÃÅÕï¿µ¸´ÖÎÁÆ");
-        map1.put("M00504", "¶ñĞÔÖ×Áö£¨·Ç·Å»¯ÁÆ£©");
-        map1.put("M03701", "ÊªĞÔÄêÁäÏà¹ØĞÔ»Æ°ß±äĞÔ");
-        map1.put("M01609", "ÌÇÄò²¡»Æ°ßË®Ö×");
-        map1.put("M03703", "ÂöÂçÄ¤ĞÂÉúÑª¹Ü");
-        map1.put("M00202", "±ûĞÍ¸ÎÑ×£¨HCV RNAÑôĞÔ£©");
-        map1.put("M01908", "Ö«¶Ë·Ê´óÖ¢");
-        map1.put("M02900", "¶à·¢ĞÔÓ²»¯");
-        map1.put("M04000", "·Î¶¯Âö¸ßÑ¹");
-        map1.put("M01903", "CĞÍÄáÂüÆ¥¿Ë²¡");
-        for (Map.Entry<String, String> a :map1.entrySet()){
-            Map <String,String> map2 = new HashMap<>();
-            map2.put(a.getKey(), a.getValue());
-            list.add(map2);
+    public static void main(String[] args) throws IOException {
+        //åˆ›å»ºExcelæ–‡ä»¶è–„
+        SXSSFWorkbook workbook = new SXSSFWorkbook();
+        //åˆ›å»ºå·¥ä½œè¡¨sheet
+        SXSSFSheet sheet = workbook.createSheet();
+        CellRangeAddress cellRangeAddress = new CellRangeAddress(0,0,0,9);
+        if (cellRangeAddress.getNumberOfCells() > 1) {
+            sheet.addMergedRegionUnsafe(cellRangeAddress);
         }
-        for(int i = 0;i<list.size();i++) {
-            StringBuilder sb = new StringBuilder(list.get(i).keySet().toString());
-            sb.replace(0, 1, "");
-            sb.replace(6, 7, "");
-            System.out.println(sb.toString());
-            System.out.println("Ãû³Æ"+list.get(i).get(sb.toString()));
-        }
+        SXSSFRow row = sheet.createRow(0);
+        SXSSFCell cell = row.createCell(0);
+        cell.setCellValue("ç¬¬ä¸€è¡Œ");
+        cell = sheet.createRow(1).createCell(0);
+        cell.setCellValue("ç¬¬äºŒè¡Œ");
+        CellStyle cs = workbook.createCellStyle();
+        cs.setAlignment(HorizontalAlignment.CENTER);
+        sheet.getRow(0).getCell(0).setCellStyle(cs);
+        File wFile = new File("D:/Users/Admin/Desktop/ç»“æœé›†/é—¨è¯Šè´¹ç”¨æ˜ç»†ä¿¡æ¯.xlsx");
+        FileOutputStream op = new FileOutputStream(wFile);
+        workbook.write(op);
+        op.flush();
+        op.close();
     }
 }
+

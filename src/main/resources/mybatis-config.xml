@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--configuration核心文件-->
+<configuration>
+    <!--引入外部配置文件-->
+    <properties resource="MyDB.properties"/>
+    <!--扫描实体类的包，它的默认别名就是这个类的类名，首字母小写-->
+    <typeAliases>
+        <package name="Mybatis.MyDTO"/>
+    </typeAliases>
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!-- 每一个Mapper.XML都需要在Mybatis核心配置文件中注册！-->
+    <mappers>
+        <mapper resource="Mybatis/MyDB/UserMapper.xml"/>
+    </mappers>
+</configuration>
